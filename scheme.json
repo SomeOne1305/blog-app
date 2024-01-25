@@ -1,0 +1,39 @@
+{
+  "users":[
+    {
+      "_id":"unique-user-1",
+      "created_at":"",
+      "email":"",
+      "surname":"",
+      "name":"",
+      "social_networks":[
+        {
+          "type":"instagram",
+          "url":"www.instagram.com/anoyodfa"
+        }
+      ],
+      "profile_image":"url",
+      "isProfile":true
+    }
+  ],
+  "posts":[
+    {
+      "_id":"kfodkpqo23d2po",
+      "owner":"unique-user-1 this will be added in service.ts",
+      "title":"",
+      "main_image":"",
+      "texts":[
+      ],
+      "related_categories":"",
+      "comments":[
+        {
+          "name":"",
+          "comment":"",
+          "created_at":""
+        }
+      ],
+      "slug":"this will be added in service.ts",
+      "created_at":""
+    }
+  ]
+}

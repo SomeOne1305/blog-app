@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Code editor</title>
+  </head>
+  <body>
+    <form>
+      <input type="text" name="owner" placeholder="owner" />
+      <input type="text" name="title" placeholder="title" />
+      <input type="text" name="main_image" placeholder="main image" />
+      <button type="submit">submit</button>
+    </form>
+    <script>
+      const form = document.querySelector("form");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const data = {
+          owner: e.target[0].value,
+          title: e.target[1].value,
+          main_image: e.target[2].value,
+          texts: ["#Header goodbye", "#paragraph this is test data"],
+          related_categories: "#good, #tech, #education",
+        };
+        const comment = {
+          name:"Ahmad",
+          comment:"that's great, cool ! :)"
+        }
+        const response = await fetch(
+          "http://localhost:8000/v1/api/blogs/delete/65abfa2caa8b7401245ace2b",
+          {
+            method: "DELETE",
+          }
+        );
+        console.log(response.status);
+        response.json().then(data=>console.log(data))
+        console.log(data);
+      });
+    </script>
+  </body>
+</html>

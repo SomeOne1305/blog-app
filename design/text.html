@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text</title>
+  </head>
+  <body>
+    <select name="Type" id="">
+      <option value="header">Marked</option>
+      <option value="paragraph">Paragraph</option>
+    </select>
+    <input
+      type="text"
+      placeholder="Enter text"
+      style="padding: 6px"
+      id="input"
+    />
+    <button id="enter">Submit</button>
+    <script>
+      const data = [];
+      const input = document.querySelector("input");
+      const select = document.querySelector("select");
+      const button = document.querySelector("button");
+      let div = document.createElement("div");
+      div.style.padding = "7px";
+      document.body.append(div);
+      let span = document.createElement("span");
+      div.append(span);
+      const checkType = (item) => {
+        if (item.startsWith("#header")) {
+          return "h1";
+        } else if (item.startsWith("#paragraph")) {
+          return "p";
+        }
+      };
+      const checkSty = (item) => {
+        if (item.startsWith("#header")) {
+          return "#header";
+        } else if (item.startsWith("#paragraph")) {
+          return "#paragraph";
+        }
+      };
+      function render() {
+        data.length === 0
+          ? (span.innerText = "No items in it")
+          : data.map((item) => {
+              const child = document.createElement(checkType(item));
+              child.innerText = item.split(checkSty(item))[1];
+              div.append(child);
+            });
+      }
+      render();
+      const strings = "#list {this is list header} --[this is item 1] --[this is item 2] --[this is item 3]";
+      
+      // Extract list items from the string without "--[]"
+      const listItemRegex = /--\[(.*?)\]/g;
+      const listItems = [];
+      let match;
+      while ((match = listItemRegex.exec(strings)) !== null) {
+        listItems.push(match[1]);
+      }
+
+      // Extract list header from the string
+      const listHeaderRegex = /#list \{(.*?)\}/;
+      const listHeaderMatch = strings.match(listHeaderRegex);
+      const listHeader = listHeaderMatch ? listHeaderMatch[1] : '';
+
+      console.log(listHeader);
+      console.log(listItems);
+      button.onclick = () => {
+        if (select.value === "header") {
+          data.push(`#header ${input.value}`);
+          input.value = "";
+          console.log("Cleared and added", data);
+          render();
+        } else if (select.value === "paragraph") {
+          data.push(`#paragraph ${input.value}`);
+          input.value = "";
+          console.log("Cleared and added", data);
+          render();
+        }
+      };
+    </script>
+  </body>
+</html>
