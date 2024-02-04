@@ -1,1 +1,156 @@
-https://flowbite.com/application-ui/demo/authentication/sign-up/
+<!-- https://flowbite.com/application-ui/demo/authentication/sign-up/ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            container: {
+              center: true,
+              padding: "1rem",
+              screens: {
+                sm: "100%",
+                md: "748px",
+                lg: "1004px",
+                xl: "1200px",
+                "2xl": "1400px",
+                "3xl": "1400px",
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Indic+Siyaq+Numbers&display=swap");
+      * {
+        font-family: "Noto Sans Indic Siyaq Numbers", sans-serif;
+      }
+      @layer utilities {
+        .validate:not(:focus-within) > label:empty {
+          opacity: 0;
+        }
+      }
+    </style>
+    <title>BravoBlog | Register page</title>
+  </head>
+  <body>
+    <div class="w-full">
+      <section class="w-full">
+        <div class="max-w-[800px] mx-auto">
+          <div class="w-full text-center py-2">
+            <h2 class="text-2xl">Register</h2>
+          </div>
+          <form action="" class="w-full">
+            <div class="w-full p-1 flex max-sm:flex-col">
+              <div class="relative w-full p-1 max-sm:mr-0 mr-2">
+                <input
+                  type="text"
+                  id="name"
+                  class="peer w-full bg-transparent border dark:focus:border-[#0ea5e9] rounded-md border-[#e2e8f0] dark:border-[#334155] p-2 placeholder:text-transparent outline-none focus:border-[2px] focus:border-[#0ea5e9]"
+                  placeholder="name"
+                />
+                <label
+                  for="name"
+                  class="absolute select-none left-1 ml-1 top-2.5 bg-white dark:bg-inDark px-1 text-[#94a3b8] text-sm duration-100 ease-linear peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:ml-1 peer-focus:-translate-y-4 peer-focus:px-1 peer-focus:text-sm peer-focus:text-[#0ea5e9]"
+                  >Name</label
+                >
+              </div>
+              <div class="relative w-full p-1">
+                <input
+                  type="text"
+                  id="surname"
+                  class="peer validate bg-transparent dark:focus:border-[#0ea5e9] w-full dark:border-[#334155] border rounded-md border-[#e2e8f0] p-2 placeholder:text-transparent outline-none focus:border-[2px] focus:border-[#0ea5e9]"
+                  placeholder="name"
+                />
+                <label
+                  for="surname"
+                  class="absolute select-none left-1 ml-1 peer-[:not(:empty)]:hidden top-2.5 bg-transparent dark:bg-inDark px-1 text-[#94a3b8] text-sm duration-100 ease-linear peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:ml-1 peer-focus:-translate-y-4 peer-focus:px-1 peer-focus:text-sm peer-focus:text-[#0ea5e9] peer-focus:bg-white"
+                  >Surname</label
+                >
+              </div>
+            </div>
+            <div class="flex items-center">
+              <select name="Social networks" class="rounded-md outline-none py-2 inline-block bg-blue-600 text-white">
+                <option value="instagram">Instagram</option>
+                <option value="telegram">Telegram</option>
+                <option value="facebook">Facebook</option>
+                <option value="Twitter">Twitter</option>
+              </select>
+              <div class="relative w-full p-1">
+                <input
+                  type="text"
+                  id="surname"
+                  class="peer validate bg-transparent dark:focus:border-[#0ea5e9] w-full dark:border-[#334155] border rounded-md border-[#e2e8f0] p-2 placeholder:text-transparent outline-none focus:border-[2px] focus:border-[#0ea5e9]"
+                  placeholder="your profile url.."
+                />
+              </div>
+              <button class="p-2 rounded-md ml-2 text-md bg-blue-600 text-white inline-flex items-center">Add <ion-icon name="add-circle-outline" class="text-2xl"></ion-icon></ico-icon></button>
+            </div>
+            <div class="w-full p-1 flex max-sm:flex-col">
+              <div class="relative w-full p-1 max-sm:mr-0 mr-2">
+                <input
+                  type="email"
+                  id="email"
+                  class="peer w-full bg-transparent border dark:focus:border-[#0ea5e9] rounded-md border-[#e2e8f0] dark:border-[#334155] p-2 placeholder:text-transparent outline-none focus:border-[2px] focus:border-[#0ea5e9]"
+                  placeholder="name"
+                />
+                <label
+                  for="email"
+                  class="absolute select-none left-1 ml-1 top-2.5 bg-white dark:bg-inDark px-1 text-[#94a3b8] text-sm duration-100 ease-linear peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:ml-1 peer-focus:-translate-y-4 peer-focus:px-1 peer-focus:text-sm peer-focus:text-[#0ea5e9]"
+                  >Email</label
+                >
+              </div>
+              <div class="relative w-full p-1">
+                <input
+                  type="password"
+                  id="password"
+                  class="peer validate bg-transparent dark:focus:border-[#0ea5e9] w-full dark:border-[#334155] border rounded-md border-[#e2e8f0] p-2 placeholder:text-transparent outline-none focus:border-[2px] focus:border-[#0ea5e9]"
+                  placeholder="name"
+                />
+                <label
+                  for="password"
+                  class="absolute select-none left-1 ml-1 peer-[:not(:empty)]:hidden top-2.5 bg-transparent dark:bg-inDark px-1 text-[#94a3b8] text-sm duration-100 ease-linear peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:ml-1 peer-focus:-translate-y-4 peer-focus:px-1 peer-focus:text-sm peer-focus:text-[#0ea5e9] peer-focus:bg-white"
+                  >Password</label
+                >
+              </div>
+            </div>
+            <div class="w-full max-h-44 flex items-center">
+              <div class="w-[80%] h-full p-3 border border-dashed border-gray-600 rounded-md">
+                <div class="flex py-2 my-2 items-center justify-center flex-col">
+                  <ion-icon name="image-outline" class="text-5xl"></ion-icon>
+                  <h3 class="text-md font-semibold">drag and drop or <span class="text-purple-500">browse</span> to uplad</h3>
+                  <p class="text-sm text-gray-500">PNG, JPG, JPEG up to 10MB</p>
+                </div>
+              </div>
+              <div class="w-[20%] h-max ml-2 rounded-md border border-gray-500 p-1">
+                <div class="w-full max-h-44 flex items-center justify items-center flex-col">
+                  <ion-icon name="image-outline" class="text-5xl"></ion-icon>
+                  <span class="text-gray-700">Image is displayed here.</span>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+    <script>
+      document.querySelector("label").focus({ preventScroll: true });
+    </script>
+  </body>
+</html>

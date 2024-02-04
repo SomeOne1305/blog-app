@@ -1,1 +1,110 @@
-https://flowbite.com/application-ui/demo/authentication/sign-in/
+<!-- https://flowbite.com/application-ui/demo/authentication/sign-in/ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            container: {
+              center: true,
+              padding: "1rem",
+              screens: {
+                sm: "100%",
+                md: "748px",
+                lg: "1004px",
+                xl: "1200px",
+                "2xl": "1400px",
+                "3xl": "1400px",
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .val:not(:empty) + label +
+        .val:not(:placeholder-shown) + label {
+          opacity: 0;
+        }
+      }
+    </style>
+    <title>Login | BravoBlog</title>
+  </head>
+  <body>
+    <div class="w-full">
+      <form action="" class="max-w-md pt-3 mt-3 mx-auto text-center w-full">
+        <div class="flex justify-center items-center flex-col">
+          <img src="../assets/icons8-blogger-48.svg" width="100" height="100" alt="">
+          <h2 class="text-2xl text-blue-700 tracking-wide">BravoBlog</h2>
+        </div>
+        <div class="w-full p-2 m-1">
+          <div class="relative w-full max-sm:mr-0 mr-2">
+            <input
+              type="text"
+              id="email"
+              class="peer w-full val bg-transparent border dark:focus:border-[#0ea5e9] rounded-md border-[#e2e8f0] dark:border-[#334155] p-2 placeholder:text-transparent outline-none focus:border-[2px] focus:border-[#0ea5e9]"
+              placeholder=""
+            />
+            <label
+              for="email"
+              class="absolute select-none left-1 ml-1 top-2.5 bg-white dark:bg-inDark px-1 text-[#94a3b8] text-sm duration-100 ease-linear peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:ml-1 peer-focus:-translate-y-5 peer-focus:px-1 peer-focus:text-md peer-focus:text-[#0ea5e9]"
+              >Email</label
+            >
+          </div>
+          <div class="py-3"></div>
+          <div class="relative w-full max-sm:mr-0 mr-2">
+            <input
+              type="password"
+              id="password"
+              class="peer w-full bg-transparent border dark:focus:border-[#0ea5e9] rounded-md border-[#e2e8f0] dark:border-[#334155] p-2 placeholder:text-transparent outline-none focus:border-[2px] focus:border-[#0ea5e9]"
+              placeholder=""
+            />
+            <label
+              for="password"
+              class="absolute select-none left-1 ml-1 top-2.5 bg-white dark:bg-inDark px-1 text-[#94a3b8] text-sm duration-100 ease-linear peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:ml-1 peer-focus:-translate-y-5 peer-focus:px-1 peer-focus:text-md peer-focus:text-[#0ea5e9]"
+              >Password</label
+            >
+          </div>
+          <div class="text-left py-1">
+            <a href="#" class="text-sm text-blue-500 hover:underline"
+              >Forgot password ?</a
+            >
+          </div>
+          <button
+            type="submit"
+            class="w-full text-center mt-3 bg-blue-500 hover:bg-blue-600 transition duration-50 p-1 text-white rounded-md text-xl"
+          >
+            Login
+          </button>
+          <div class="py-3 mt-3">
+            <div class="w-full h-[2px] my-3 bg-blue-500 relative">
+              <span
+                class="absolute uppercase -bottom-2 left-[31%] px-1 bg-white text-black-800 text-md"
+                >or register now</span
+              >
+            </div>
+          </div>
+          <a
+            href="#"
+            class="my-3 py-1 text-center text-md block border border-blue-500 text-blue-500 font-semibold rounded-md"
+            >Register</a
+          >
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
