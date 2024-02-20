@@ -1,5 +1,5 @@
 import { Schema,Prop, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument } from "mongoose";
+import { Document, HydratedDocument } from "mongoose";
 
 class socialNetwork{
   @Prop()
@@ -19,7 +19,7 @@ export class User {
   @Prop()
   surname:string
 
-  @Prop()
+  @Prop({unique:true})
   email:string
 
   @Prop()
@@ -35,5 +35,5 @@ export class User {
   social_networks:socialNetwork[]
 }
 
-export type UserDocument = HydratedDocument<User>
+export type UserDocument = Document & User;
 export const UserSchema = SchemaFactory.createForClass(User)

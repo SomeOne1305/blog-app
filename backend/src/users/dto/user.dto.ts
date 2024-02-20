@@ -1,4 +1,4 @@
-import { IsBoolean, IsEmail, IsNotEmpty, isEmail } from "class-validator";
+import { IsBoolean, IsEmail, IsNotEmpty, IsStrongPassword, isEmail } from "class-validator";
 
 class socialProfile {
   @IsNotEmpty()
@@ -19,6 +19,9 @@ export class UserDto {
   @IsEmail()
   email:string;
 
+  @IsStrongPassword({minLength:8})
+  password:string;
+
   @IsNotEmpty()
   profile_image:string;
 
@@ -26,6 +29,4 @@ export class UserDto {
   isProfile:boolean;
 
   social_networks:socialProfile[]
-
-
 }
