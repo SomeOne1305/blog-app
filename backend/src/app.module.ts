@@ -6,14 +6,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 
 //Users
-import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
-import { UsersService } from './users/users.service';
 
 //Blogs
 import { BlogsModule } from './blogs/blogs.module';
-import { BlogsController } from './blogs/blogs.controller';
-import { BlogsService } from './blogs/blogs.service';
 
 @Module({
   imports: [
@@ -22,8 +18,8 @@ import { BlogsService } from './blogs/blogs.service';
     BlogsModule,
     ConfigModule.forRoot(),
   ],
-  controllers: [AppController, UsersController, BlogsController],
-  providers: [AppService, UsersService, BlogsService],
+  controllers: [AppController],
+  providers: [AppService],
   exports: [],
 })
 export class AppModule {}

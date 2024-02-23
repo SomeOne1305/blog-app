@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException,UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import {InjectModel} from '@nestjs/mongoose';
 import { User, UserDocument } from './user.schema';
 import { Model} from 'mongoose';
@@ -26,18 +26,15 @@ export class UsersService {
   }
 
   async createUser(dto:UserDto){
-    const {email,isProfile,name,password,profile_image,social_networks,surname} = dto
-    const hashedPassword = bcrypt.hash(password,16)
-    const user = {
-      name,
-      surname,
-      email,
-      password:hashedPassword,
-      profile_image,
-      isProfile,
-      social_networks
+    const {email,password,} = dto
+    const userExist = await this.userModel.findOne({email:email})
+    if(userExist){
+      throw new BadRequestException('This user has already been registered.')
     }
-    const savedUser = await this.userModel.create(user)
+    const hashedPassword = await bcrypt.hash(password,12)
+
+
+    const savedUser = await this.userModel.create({...dto,password:hashedPassword})
     return this.jwt.sign({userId:savedUser._id, email:savedUser.email})
   }
 
@@ -46,8 +43,10 @@ export class UsersService {
     if(!user){
       throw new UnauthorizedException("Invalid credentials")
     }
-    if(bcrypt.compare(dto.password,user.password)){
+    if(await bcrypt.compare(dto.password,user.password) && user){
       return this.jwt.sign({userId:user._id,email:user.email})
+    }else{
+      throw new BadRequestException('Invalid credentials')
     }
   }
 
