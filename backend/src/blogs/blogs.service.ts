@@ -15,8 +15,12 @@ export class BlogsService {
   async getExactUserBlogs(id:string){
     return this.blogModel.find({owner:id})
   }
+  
+  async getHotNews(){
+    return await this.blogModel.find().sort({createdAt:-1}).limit(10).exec()
+  }
 
-  async createBlog(dto:BlogDto){
+  async createBlog(dto:BlogDto, userId:string){
     function slugify(text: string) {
       return text
         .toString()
@@ -28,7 +32,7 @@ export class BlogsService {
         .replace(/^-+/, "")
         .replace(/-+$/, "");
     }
-    return this.blogModel.create({...dto, slug:slugify(dto.title), comments:[]})
+    return this.blogModel.create({...dto,owner:userId,slug:slugify(dto.title), comments:[]})
   }
 
   async getBlogDataById(blogID:string){
@@ -44,7 +48,6 @@ export class BlogsService {
     console.log('received',blogID,commentDto);
     
     
-
     const updatedBlog = await existingBlog.save()
     return updatedBlog.toObject()
   }

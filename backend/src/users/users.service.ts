@@ -2,15 +2,22 @@ import { BadRequestException, Injectable, NotFoundException, UnauthorizedExcepti
 import {InjectModel} from '@nestjs/mongoose';
 import { User, UserDocument } from './user.schema';
 import { Model} from 'mongoose';
-import { UserDto } from './dto/user.dto';
+import { ResetPassDto, UserDto } from './dto/user.dto';
 import * as bcrypt from 'bcryptjs'
 import { JwtService } from '@nestjs/jwt';
+import { generateCookie } from './cookie/cookie';
+import { Inject } from '@nestjs/common';
+import { CACHE_MANAGER,Cache } from '@nestjs/cache-manager';
+import { MailerService } from '@nestjs-modules/mailer';
+import { renderTemplate } from './mail';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectModel(User.name) private readonly userModel:Model<UserDocument>,
-    private readonly jwt:JwtService
+    private readonly jwt:JwtService,
+    @Inject(CACHE_MANAGER) private readonly cache:Cache,
+    private readonly mailer:MailerService
   ){}
 
   async getAllUsers(){
@@ -35,7 +42,7 @@ export class UsersService {
 
 
     const savedUser = await this.userModel.create({...dto,password:hashedPassword})
-    return this.jwt.sign({userId:savedUser._id, email:savedUser.email})
+    return this.jwt.sign(generateCookie(savedUser._id,"user"))
   }
 
   async returnUser(dto:{email:string, password:string}){
@@ -44,7 +51,7 @@ export class UsersService {
       throw new UnauthorizedException("Invalid credentials")
     }
     if(await bcrypt.compare(dto.password,user.password) && user){
-      return this.jwt.sign({userId:user._id,email:user.email})
+      return this.jwt.sign(generateCookie(user._id,'user'))
     }else{
       throw new BadRequestException('Invalid credentials')
     }
@@ -52,6 +59,36 @@ export class UsersService {
 
   async updateUserData(userId:string, dto:UserDto){
     return this.userModel.findByIdAndUpdate(userId,dto,{new:true})
+  }
+
+  async send_verification(email:string){
+    const userExist = await this.userModel.findOne({email:email})
+    if(!userExist){
+      new UnauthorizedException('Invalid user credential')
+    }
+    const verificationCode = Math.floor(100000 * Math.random())
+    await this.cache.set(email,verificationCode,600)
+    await this.mailer.sendMail({
+      from:process.env.MAIL_USER,
+      to:email,
+      subject:`Verification code to reset password: [${verificationCode}]`,
+      template:renderTemplate(userExist.name,verificationCode)
+    })
+  }
+
+  async verify_code(email:string,code:number){
+    const storedCode = await this.cache.get(email)
+    if(code === storedCode){
+      await this.cache.del(email)
+      return true
+    }else{
+      return false
+    }
+  }
+
+  async resetPassword(dto:ResetPassDto){
+    const hashedPass = await bcrypt.hash(dto.password,12)
+    return await this.userModel.findOneAndUpdate({email:dto.email},{password:hashedPass},{new:true})
   }
 }
 // https://medium.com/@anikettikone9/authentication-authorization-using-nest-js-typescript-with-mongodb-2f4de48fafe0

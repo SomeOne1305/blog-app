@@ -1,35 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Outlet } from "react-router-dom";
+import React from "react";
+import Loader from "react-top-loading-bar";
+import { Context } from "./context";
+import { Navbar } from "./components/layouts/Navbar";
+import Footer from "./components/layouts/Footer";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { loading, progress } = React.useContext(Context);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="min-h-screen w-full flex flex-col justify-between">
+      <div className="py-3"/>
+      <Navbar />
+      <h1 className="text-2xl text-blue-500">Hello world</h1>
+      {loading ? (
+        <Loader progress={progress} height={3} shadow={true} color="#27b8d9" shadowStyle={{boxShadow:"0 4px 4px 2px #27b8d9"}}/>
+      ) : (
+        ""
+      )}
+      <Outlet />
+      <Footer/>
+    </div>
+  );
 }
 
-export default App
+export default App;

@@ -1,4 +1,4 @@
-import { IsBoolean, IsEmail, IsNotEmpty, isEmail } from "class-validator";
+import { IsBoolean, IsEmail, IsNotEmpty,IsNumber,MinLength } from "class-validator";
 
 class socialProfile {
   @IsNotEmpty()
@@ -20,6 +20,7 @@ export class UserDto {
   email:string;
 
   @IsNotEmpty()
+  @MinLength(8,{message:"Password must be in minimum 8 characters."})
   password:string;
 
   @IsNotEmpty()
@@ -29,4 +30,22 @@ export class UserDto {
   isProfile:boolean;
 
   social_networks:socialProfile[]
+}
+
+export class EmailDto{
+  @IsEmail()
+  email:string;
+}
+
+export class VerificationDto{
+  @IsEmail()
+  email:string;
+
+  @IsNumber({maxDecimalPlaces:5})
+  code:number
+}
+
+export class ResetPassDto extends VerificationDto{
+  @MinLength(8,{message:"Password must be in minimum 8 characters."})
+  password:string
 }

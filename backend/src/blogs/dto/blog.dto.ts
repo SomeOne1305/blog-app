@@ -9,8 +9,6 @@ export class CommentDto{
 }
 
 export class BlogDto{
-  @IsNotEmpty()
-  owner:string
 
   @IsNotEmpty()
   title:string

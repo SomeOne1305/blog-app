@@ -12,7 +12,7 @@
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
-
+    <script src="./tailwind.js"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -39,35 +39,33 @@
       * {
         font-family: "Noto Sans Indic Siyaq Numbers", sans-serif;
       }
+      colgroup{
+        color: #393848fc;
+      }
     </style>
     <title>Blog page</title>
   </head>
   <body>
-    <nav class="w-full fixed top-0 left-0 shadow-md">
-      <div class="container flex items-center justify-between">
+    <nav class="w-full bg-[#201E30] fixed top-0 left-0 shadow-md">
+      <div class="container py-2 flex items-center justify-between">
         <a href="#" class="inline-flex items-center">
           <img src="../assets/icons8-blogger-48.svg" alt="" />
-          <h1 class="text-xl">BravoBlog</h1>
+          <h1 class="text-xl text-white">BravoBlog</h1>
         </a>
         <div class="p-1 inline-flex items-center">
+          <div class="p-1 pb-0 group mx-2 cursor-pointer hover:bg-[#393848fc] rounded-md">
+            <ion-icon name="moon-outline" class="text-xl text-white group-hover:text-blue-500 md hydrated" role="img"></ion-icon>
+          </div>
           <a
             href="#"
-            class="py-2 px-3 text-md text-white mx-2 inline-flex items-center group"
+            class="py-2 px-3 text-md text-white mx-2 inline-flex items-center hover:bg-[#393848fc] rounded-md group"
           >
-            <ion-icon
-              name="log-in-outline"
-              class="text-xl group-hover:text-blue-600"
-            ></ion-icon>
             <span class="group-hover:text-blue-600">Login</span>
           </a>
           <a
             href="#"
-            class="py-2 px-3 text-md text-white inline-flex items-center group"
+            class="py-2 px-3 text-md text-black bg-white rounded-md inline-flex items-center group"
           >
-            <ion-icon
-              name="person-sharp"
-              class="text-xl group-hover:text-blue-600"
-            ></ion-icon>
             <span class="group-hover:text-blue-600">Register</span>
           </a>
         </div>
@@ -82,10 +80,10 @@
             Discover, Learn and Enjoy with
             <span class="text-blue-500 uppercase">BravoBlog</span>
           </h1>
-          <p class="text-white text-xl mt-2">
+          <p class="text-white text-xl mt-3">
             Join us on this exciting journey, and let's explore together!
           </p>
-          <div class="p-2 m-2">
+          <div class="p-2 m-2 mt-3">
             <a
               href="#"
               class="px-3 py-2 text-xl text-white bg-blue-600 hover:bg-blue-500 transition rounded-md"
@@ -153,9 +151,7 @@
     </section>
     <footer class="py-6 bg-[#201E30] text-gray-50 dark:bg-gray-800 dark:text-gray-50">
       <div
-        class="container px-6 mx-auto space-y-6 divide-y dark:divide-gray-400 md:space-y-12 divide-opacity-50"
-        
-      >
+        class="container px-6 mx-auto space-y-6 divide-y dark:divide-gray-400 md:space-y-12 divide-opacity-50">
         <div class="grid grid-cols-12" >
           <div
             class="pb-6 col-span-full md:pb-0 md:col-span-6"
@@ -179,14 +175,14 @@
             class="col-span-6 text-center md:text-left md:col-span-3"
             
           >
-            <p class="pb-1 text-lg font-medium">Category</p>
-            <ul>
+            <p class="pb-1 text-lg font-medium">Resources</p>
+            <ul class="mt-2">
               <li>
                 <a
                   rel="noopener noreferrer"
                   href="#"
                   class="hover:dark:text-violet-400"
-                  >Link</a
+                  >Blogs</a
                 >
               </li>
               <li>
@@ -194,7 +190,7 @@
                   rel="noopener noreferrer"
                   href="#"
                   class="hover:dark:text-violet-400"
-                  >Link</a
+                  >Latest Blogs</a
                 >
               </li>
               <li>
@@ -202,39 +198,21 @@
                   rel="noopener noreferrer"
                   href="#"
                   class="hover:dark:text-violet-400"
-                  >Link</a
-                >
-              </li>
-              <li>
-                <a
-                  rel="noopener noreferrer"
-                  href="#"
-                  class="hover:dark:text-violet-400"
-                  >Link</a
-                >
-              </li>
-              <li>
-                <a
-                  rel="noopener noreferrer"
-                  href="#"
-                  class="hover:dark:text-violet-400"
-                  >Link</a
+                  >Search</a
                 >
               </li>
             </ul>
           </div>
           <div
-            class="col-span-6 text-center md:text-left md:col-span-3"
-            
-          >
-            <p class="pb-1 text-lg font-medium">Category</p>
-            <ul>
+            class="col-span-6 text-center md:text-left md:col-span-3">
+            <p class="pb-1 text-lg font-medium">Support</p>
+            <ul class="mt-2">
               <li>
                 <a
                   rel="noopener noreferrer"
                   href="#"
                   class="hover:dark:text-violet-400"
-                  >Link</a
+                  >Contact Us</a
                 >
               </li>
               <li>
@@ -242,45 +220,19 @@
                   rel="noopener noreferrer"
                   href="#"
                   class="hover:dark:text-violet-400"
-                  >Link</a
-                >
-              </li>
-              <li>
-                <a
-                  rel="noopener noreferrer"
-                  href="#"
-                  class="hover:dark:text-violet-400"
-                  >Link</a
-                >
-              </li>
-              <li>
-                <a
-                  rel="noopener noreferrer"
-                  href="#"
-                  class="hover:dark:text-violet-400"
-                  >Link</a
-                >
-              </li>
-              <li>
-                <a
-                  rel="noopener noreferrer"
-                  href="#"
-                  class="hover:dark:text-violet-400"
-                  >Link</a
+                  >CEO</a
                 >
               </li>
             </ul>
           </div>
         </div>
         <div
-          class="grid justify-center pt-6 lg:justify-between"
-          
-        >
+          class="grid justify-center pt-6 lg:justify-between">
           <div
             class="flex flex-col self-center text-sm text-center md:block lg:col-start-1 md:space-x-6"
             
           >
-            <span>©2024 All rights reserved</span>
+            <span class="mr-3"><span class="mr-2">©2024</span> All rights reserved</span>
             <a rel="noopener noreferrer" href="#">
               <span>Privacy policy</span>
             </a>
