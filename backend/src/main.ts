@@ -8,7 +8,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookie())
   app.enableCors({
-    origin:'http://127.0.0.1:5500'
+    origin:['http://localhost:5173','http://127.0.0.1:5500'],
+    credentials:true,
+    methods:["POST","PUT","PATCH","DELETE","GET"]
   })
   const PORT = process.env.PORT || 8000 
   app.setGlobalPrefix("/v1/api")

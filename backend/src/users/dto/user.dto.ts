@@ -26,9 +26,6 @@ export class UserDto {
   @IsNotEmpty()
   profile_image:string;
 
-  @IsBoolean()
-  isProfile:boolean;
-
   social_networks:socialProfile[]
 }
 

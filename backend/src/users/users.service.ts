@@ -1,3 +1,4 @@
+import { ConfigService } from '@nestjs/config';
 import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import {InjectModel} from '@nestjs/mongoose';
 import { User, UserDocument } from './user.schema';
@@ -17,7 +18,8 @@ export class UsersService {
     @InjectModel(User.name) private readonly userModel:Model<UserDocument>,
     private readonly jwt:JwtService,
     @Inject(CACHE_MANAGER) private readonly cache:Cache,
-    private readonly mailer:MailerService
+    private readonly mailer:MailerService,
+    private readonly config:ConfigService
   ){}
 
   async getAllUsers(){
@@ -66,14 +68,23 @@ export class UsersService {
     if(!userExist){
       new UnauthorizedException('Invalid user credential')
     }
-    const verificationCode = Math.floor(100000 * Math.random())
+    const min = 10000;
+    const max = 89999;
+    const verificationCode = Math.floor(Math.random() * (max - min + 1)) + min;
     await this.cache.set(email,verificationCode,600)
     await this.mailer.sendMail({
-      from:process.env.MAIL_USER,
+      from:"anonymousmrx55@mail.ru",
       to:email,
       subject:`Verification code to reset password: [${verificationCode}]`,
-      template:renderTemplate(userExist.name,verificationCode)
+      html:renderTemplate(userExist.name,verificationCode)
     })
+    const date = this.config.get("MAIL_USER")
+    console.log(date)
+    return {
+      status:200,
+      verification_code:verificationCode,
+      test:date
+    }
   }
 
   async verify_code(email:string,code:number){
@@ -89,6 +100,16 @@ export class UsersService {
   async resetPassword(dto:ResetPassDto){
     const hashedPass = await bcrypt.hash(dto.password,12)
     return await this.userModel.findOneAndUpdate({email:dto.email},{password:hashedPass},{new:true})
+  }
+
+  async deleteUser(userId:string){
+    await this.userModel.findByIdAndDelete(userId,{
+      new:true
+    })
+    return {
+      status:"ok",
+      message:"User is deleted successfully !"
+    }
   }
 }
 // https://medium.com/@anikettikone9/authentication-authorization-using-nest-js-typescript-with-mongodb-2f4de48fafe0

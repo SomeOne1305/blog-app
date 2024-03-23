@@ -4,6 +4,7 @@ import {
   Res,
   Post,
   Put,
+  Delete,
   UseGuards,
   Req,
   Body,
@@ -13,7 +14,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { AuthGuard } from './user.guard';
-import { UserDto } from './dto/user.dto';
+import { EmailDto, UserDto } from './dto/user.dto';
 import { Response } from 'express';
 
 @Controller('users')
@@ -68,5 +69,19 @@ export class UsersController {
   async updateUser(@Req() req, @Body() body: UserDto) {
     const userId = req.user.userId;
     return this.userService.updateUserData(userId, body);
+  }
+
+  @HttpCode(201)
+  @Post('/send-code')
+  @UsePipes(ValidationPipe)
+  async send_code(@Body() body:EmailDto){
+    return this.userService.send_verification(body.email)
+  }
+
+  @HttpCode(203)
+  @Delete('/delete-user')
+  @UseGuards(AuthGuard)
+  async deleteUser(@Req() req){
+    return this.userService.deleteUser(req.userId)
   }
 }

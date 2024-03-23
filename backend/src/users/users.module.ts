@@ -6,7 +6,6 @@ import { UsersController } from './users.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { CacheModule } from '@nestjs/cache-manager';
-import * as redisStore from 'cache-manager-redis-store'
 import { RedisClientOptions } from 'redis';
 
 @Module({
@@ -23,20 +22,28 @@ import { RedisClientOptions } from 'redis';
     }),
     MailerModule.forRoot({
       transport:{
+        host:'smtp.mail.ru',
         auth:{
-          user:process.env.MAIL_USER,
-          pass:process.env.MAIL_PASS
+          // user:process.env.MAIL_USER,
+          // pass:process.env.MAIL_PASS
+          user:"anonymousmrx55@mail.ru",
+          pass:"Z7nsfqdyPeNeZWLvmGzw"
         },
       },
     }),
     CacheModule.register<RedisClientOptions>({
       isGlobal:true,
       store:'redis',
-      password:process.env.REDIS_PASS,
+      // password:process.env.REDIS_PASS,
+      // socket:{
+      //   host:process.env.REDIS_HOST,
+      //   port:+process.env.REDIS_PORT
+      // },
+      password:"A!a2h3m4a5d@",
       socket:{
-        host:process.env.REDIS_HOST,
-        port:+process.env.REDIS_PORT
-      },
+        host:"redis-16521.c322.us-east-1-2.ec2.cloud.redislabs.com",
+        port:16521
+      }
     })
   ],
   exports:[]

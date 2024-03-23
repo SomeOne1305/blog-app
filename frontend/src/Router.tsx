@@ -1,7 +1,7 @@
-import {createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import { Link } from "./components/common";
-import { ErrorPage } from "./components/layouts";
+import { Article, Blogs, ErrorPage } from "./components/layouts";
+import { BlogsPage, Home, Login, Register } from "./components/pages";
 
 export const router = createBrowserRouter([
   {
@@ -11,12 +11,55 @@ export const router = createBrowserRouter([
     children:[
       {
         path:"",
-        element:<div>this is main page <Link to="/about" className="text-blue-700">About</Link></div>
+        element:<Home/>
       },
       {
-        path:"about",
-        element:<div>this is about page <Link to='/'>Home</Link></div>
+        path:"login",
+        element:<Login/>
+      },
+      {
+        path:"register",
+        element:<Register/>
+      },
+      {
+        path:"blogs",
+        element:<BlogsPage/>,
+        children:[
+          {
+            path:"all",
+            index:true,
+            element:<Blogs/>
+          },
+        ]
+      },
+      {
+        path:"blog",
+        element:<BlogsPage/>,
+        children:[
+          {
+            path:":id",
+            element:<Article/>
+          }
+        ]
       }
     ]
   }
 ])
+
+// export const Router = () => {
+//   return (
+//     <Routes>
+//       <Route path="/" errorElement={<ErrorPage />} element={<App />}>
+//         <Route path="" element={<Home />} />
+//         <Route path="login" element={<Login />} />
+//         <Route path="register" element={<Register />} />
+//         <Route path="blogs" element={<BlogsPage />}>
+//           <Route path="" element={<Blogs />}/>
+//           <Route path="/blog" element={<Article />}>
+//             <Route path="/:id" element={<div></div>}/>
+//           </Route>
+//         </Route>
+//       </Route>
+//     </Routes>
+//   );
+// };

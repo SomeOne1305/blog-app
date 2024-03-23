@@ -3,15 +3,19 @@ import { BlogsService } from './blogs.service';
 import { BlogDto, CommentDto } from './dto/blog.dto';
 import { AuthGuard } from 'src/users/user.guard';
 import { Request } from 'express';
+import { ConfigService } from '@nestjs/config';
 
 
 @Controller('blogs')
 export class BlogsController {
-  constructor(private readonly blogService:BlogsService){}
+  constructor(private readonly blogService:BlogsService,
+    private readonly config:ConfigService
+  ){}
 
   @HttpCode(200)
   @Get('/all')
   async getAll(){
+    
     return this.blogService.getAll()
   }
 
@@ -38,9 +42,9 @@ export class BlogsController {
   }
 
   @HttpCode(200)
-  @Get(':blogId')
-  async getBlogById(@Param("blogId") blogId:string){
-    return this.blogService.getBlogDataById(blogId)
+  @Get('blog/:slug')
+  async getBlogBySlug(@Param("slug") slug:string){
+    return this.blogService.getBlogBySlug(slug)
   }
 
   @HttpCode(201)

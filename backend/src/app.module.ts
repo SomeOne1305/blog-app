@@ -16,7 +16,13 @@ import { BlogsModule } from './blogs/blogs.module';
     MongooseModule.forRoot(`mongodb+srv://axmadxolmuminov2007:1Flu6pth4ODIaZuI@database.ucujp4d.mongodb.net/?retryWrites=true&w=majority`),
     UsersModule,
     BlogsModule,
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal:true,
+      envFilePath:'src/.env.local',
+      load:[()=>({
+        mail:process.env.MAIL_PASS
+      }),]
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

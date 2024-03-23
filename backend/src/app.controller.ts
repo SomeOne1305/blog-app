@@ -17,4 +17,8 @@ export class AppController {
     
     return status
   }
+  @Get('vars')
+  sendVars(){
+    return this.appService.sendVars()
+  }
 }

@@ -35,8 +35,8 @@ export class BlogsService {
     return this.blogModel.create({...dto,owner:userId,slug:slugify(dto.title), comments:[]})
   }
 
-  async getBlogDataById(blogID:string){
-    return this.blogModel.findById(blogID)
+  async getBlogBySlug(slug:string){
+    return this.blogModel.find({slug:slug})
   }
 
   async createCommentInBlog(blogID:string,commentDto:{name:string, comment:string}){

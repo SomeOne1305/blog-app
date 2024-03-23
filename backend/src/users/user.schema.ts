@@ -29,9 +29,6 @@ export class User {
   profile_image:string
 
   @Prop()
-  isProfile:boolean
-
-  @Prop()
   social_networks:socialNetwork[]
 }
 
